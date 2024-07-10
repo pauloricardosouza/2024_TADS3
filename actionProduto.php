@@ -83,8 +83,7 @@
             }
         }
         else{
-            echo "<div class='alert alert-warning text-center'>
-            Erro ao tentar fazer o <strong>UPLOAD DA FOTO</strong>!</div>";
+            echo "<div class='alert alert-warning text-center'>Erro ao tentar fazer o <strong>UPLOAD DA FOTO</strong>!</div>";
             $erroUpload = true;
         }
         
@@ -92,8 +91,8 @@
         if(!$erroPreenchimento && !$erroUpload){
 
             //Cria a Query para realizar a inserção das informações na tabela Produtos
-            $inserirProduto = "INSERT INTO Produtos (nomeProduto, descricaoProduto, categoriaProduto, valorProduto, condicaoProduto, dataCadastroProduto, horaCadastroProduto, statusProduto)
-                            VALUES ('$nomeProduto', '$descricaoProduto', '$categoriaProduto', $valorProduto, '$condicaoProduto', '$dataCadastroProduto', '$horaCadastroProduto', 'disponivel')"; 
+            $inserirProduto = "INSERT INTO Produtos (fotoProduto, nomeProduto, descricaoProduto, categoriaProduto, valorProduto, condicaoProduto, dataCadastroProduto, horaCadastroProduto, statusProduto)
+                            VALUES ('$fotoProduto', '$nomeProduto', '$descricaoProduto', '$categoriaProduto', $valorProduto, '$condicaoProduto', '$dataCadastroProduto', '$horaCadastroProduto', 'disponivel')"; 
 
             //Inclui o arquivo para conexão com o Banco de Dados
             include("conexaoBD.php");
@@ -135,9 +134,7 @@
                 ";
             }
             else{
-                echo "<div class='alert alert-danger text-center'>
-                            Erro ao tentar cadastrar produto!
-                    </div>" . mysqli_error($conn);
+                echo "<div class='alert alert-danger text-center'>Erro ao tentar cadastrar produto!</div>" . mysqli_error($conn);
                 echo "<p>$inserirProduto</p>";
             }
         }
