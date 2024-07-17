@@ -42,17 +42,49 @@
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
+                    <?php
+                        //Desabilitar reportagem de erros de execução
+                        error_reporting(0);
+                        session_start();
+                        $idUsuario    = $_SESSION["idUsuario"];
+                        $tipoUsuario  = $_SESSION["tipoUsuario"];
+                        $fotoUsuario  = $_SESSION["fotoUsuario"];
+                        $nomeUsuario  = $_SESSION["nomeUsuario"];
+                        $emailUsuario = $_SESSION["emailUsuario"];
+                    ?>
                     <li class="nav-item">
                         <a class="nav-link active" href="index.php" title="Ir para a Página Inicial">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="formProduto.php" title="Cadastrar Produto">Cadastrar Produto</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="formLogin.php" title="Acessar o Sistema">Login</a>
-                    </li>
                 </ul>
             </div>
+            <?php
+                //Verifica se há sessão iniciada
+                if(isset($_SESSION['logado']) && $_SESSION['logado'] === true){
+                    echo "
+                        <ul class='navbar-nav'>
+                            <li>
+                                <div class='container'>
+                                    <img src='$fotoUsuario'
+                                        class='img-fluid max-height rounded'
+                                        title='Esta é a sua foto do perfil'>
+                                </div>
+                            </li>
+                            <li class='nav-item dropdown'>
+                                <a class='nav-link dropdown-toggle'
+                                    href='#' role='button' data-bs-toggle='dropdown'
+                                    style='color: yellow'><strong>$emailUsuario</strong>'
+                                </a>
+                            </li>
+                            <li class='nav-item'>
+                                <a class='nav-link' href='formLogin.php' title='Acessar o Sistema'>Login</a>
+                            </li>
+                        </ul>
+                    ";
+                }
+            ?>
         </div>
     </nav>
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 10-Jul-2024 às 03:40
+-- Tempo de geração: 17-Jul-2024 às 03:29
 -- Versão do servidor: 8.0.26
 -- versão do PHP: 8.0.10
 
@@ -63,15 +63,18 @@ CREATE TABLE `usuarios` (
   `emailUsuario` varchar(50) NOT NULL,
   `senhaUsuario` varchar(100) NOT NULL,
   `dataCadastroUsuario` date NOT NULL,
-  `horaCadastroUsuario` time NOT NULL
+  `horaCadastroUsuario` time NOT NULL,
+  `tipoUsuario` varchar(20) NOT NULL,
+  `statusUsuario` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Extraindo dados da tabela `usuarios`
 --
 
-INSERT INTO `usuarios` (`idUsuario`, `fotoUsuario`, `nomeUsuario`, `cidadeUsuario`, `telefoneUsuario`, `emailUsuario`, `senhaUsuario`, `dataCadastroUsuario`, `horaCadastroUsuario`) VALUES
-(1, 'img/senhorCapivara.jpeg', 'Capivara Roedora de Matos', 'telemaco', '(42) 99922-2222', 'capivara@gmail.com', '202cb962ac59075b964b07152d234b70', '2024-04-09', '21:43:36');
+INSERT INTO `usuarios` (`idUsuario`, `fotoUsuario`, `nomeUsuario`, `cidadeUsuario`, `telefoneUsuario`, `emailUsuario`, `senhaUsuario`, `dataCadastroUsuario`, `horaCadastroUsuario`, `tipoUsuario`, `statusUsuario`) VALUES
+(1, 'img/senhorCapivara.jpeg', 'Capivara Roedora de Matos', 'telemaco', '(42) 99922-2222', 'capivara@gmail.com', '202cb962ac59075b964b07152d234b70', '2024-04-09', '21:43:36', 'administrador', 'ativo'),
+(3, 'img/ana.jpg', 'Ana Conda', 'telemaco', '(23) 42323-4234', 'anaconda@gmail.com', '202cb962ac59075b964b07152d234b70', '2024-07-17', '01:22:43', 'consumidor', 'ativo');
 
 --
 -- Índices para tabelas despejadas
@@ -103,7 +106,7 @@ ALTER TABLE `produtos`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `idUsuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idUsuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
