@@ -48,11 +48,11 @@
                         <div class='col-sm-3'>
                             <!-- Início do Card para exibição do produto-->
                             <div class='card' style='width:100%; height:100%;'>
-                                <img class='card-img-top' src='$fotoProduto' alt='Card image'>
+                                <img class='card-img-top' src='$fotoProduto' alt='Card image' title='Foto de $nomeProduto'>
                                 <div class='card-body'>
                                     <h4 class='card-title'>$nomeProduto</h4>
-                                    <p class='card-text'>$valorProduto</p>
-                                    <a href='#' class='btn btn-primary'>Ver Detalhes</a>
+                                    <p class='card-text'>R$ $valorProduto</p>
+                                    <a href='visualizarProduto.php' class='btn btn-primary'>Ver Detalhes</a>
                                 </div>
                             </div>
                         </div>
