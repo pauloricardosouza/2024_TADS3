@@ -34,6 +34,17 @@
         <h1>Genérico - Sistema Web para Vendas</h1>
     </div>
 
+    <?php
+        error_reporting(0); //Desabilita reportagem de erros de execução
+        session_start(); //Inicia Sessão
+        //Cria variáveis para receber os valores das variáveis de sessão
+        $idUsuario    = $_SESSION["idUsuario"];
+        $tipoUsuario  = $_SESSION["tipoUsuario"];
+        $fotoUsuario  = $_SESSION["fotoUsuario"];
+        $nomeUsuario  = $_SESSION["nomeUsuario"];
+        $emailUsuario = $_SESSION["emailUsuario"];
+    ?>
+
     <!-- Barra de Navegação do Sistema -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
         <div class="container-fluid">
@@ -42,48 +53,51 @@
             </button>
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
-                    <?php
-                        //Desabilitar reportagem de erros de execução
-                        error_reporting(0);
-                        session_start();
-                        $idUsuario    = $_SESSION["idUsuario"];
-                        $tipoUsuario  = $_SESSION["tipoUsuario"];
-                        $fotoUsuario  = $_SESSION["fotoUsuario"];
-                        $nomeUsuario  = $_SESSION["nomeUsuario"];
-                        $emailUsuario = $_SESSION["emailUsuario"];
-                    ?>
                     <li class="nav-item">
                         <a class="nav-link active" href="index.php" title="Ir para a Página Inicial">Home</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="formProduto.php" title="Cadastrar Produto">Cadastrar Produto</a>
-                    </li>
+
+                    <?php
+                        //Se o tipo de Usuario for administrador, exibe a opção Cadastrar Produto
+                        if ($tipoUsuario == "administrador"){
+                            echo "
+                                <li class='nav-item'>
+                                    <a class='nav-link' href='formProduto.php' title='Cadastrar Produto'>Cadastrar Produto</a>
+                                </li>
+                            ";
+                        }
+                    ?>
                 </ul>
             </div>
             <?php
-                //Verifica se há sessão iniciada
-                if(isset($_SESSION['logado']) && $_SESSION['logado'] === true){
-                    echo "
-                        <ul class='navbar-nav'>
+                echo "<ul class='navbar-nav'>";
+                    //Verifica se há sessão iniciada
+                    if(isset($_SESSION['logado']) && $_SESSION['logado'] === true){
+                        //Se houver sessão iniciada, exibe a foto do perfil, o email do usuário (amarelo, caso consumidor / vermelho, caso administrador) e troca a opção LOGIN por LOGOUT
+                        echo "
                             <li>
                                 <div class='container'>
-                                    <img src='$fotoUsuario'
-                                        class='img-fluid max-height rounded'
-                                        title='Esta é a sua foto do perfil'>
+                                    <img src='$fotoUsuario' class='img-fluid max-height rounded' title='Esta é a sua foto do perfil, $nomeUsuario' style='height:30px;'>
                                 </div>
                             </li>
                             <li class='nav-item dropdown'>
-                                <a class='nav-link dropdown-toggle'
-                                    href='#' role='button' data-bs-toggle='dropdown'
-                                    style='color: yellow'><strong>$emailUsuario</strong>'
+                                <a class='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown'style='color: yellow'><strong>$emailUsuario</strong>
                                 </a>
                             </li>
+                            <li class='nav-item dropdown'>
+                                <a class='nav-link' href='logout.php' title='Sair do Sistema'>Logout</a>
+                            </li>
+                        ";
+                    }
+                    else {
+                        //Se não houver sessão iniciada, exibe a opção de acessar o sistema
+                        echo "
                             <li class='nav-item'>
                                 <a class='nav-link' href='formLogin.php' title='Acessar o Sistema'>Login</a>
                             </li>
-                        </ul>
-                    ";
-                }
+                        ";
+                    }
+                echo "</ul>";
             ?>
         </div>
     </nav>
