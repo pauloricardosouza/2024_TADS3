@@ -7,7 +7,7 @@
 
             <div class='col-sm-3'></div>
 
-            <div class='col-sm-6 text-center'>
+            <div class='col-sm-6 text-center mb-5'>
 
                 <!-- Carousel -->
                 <div id='demo' class='carousel slide' data-bs-ride='carousel' style='margin:auto;'>
