@@ -43,6 +43,10 @@
         $fotoUsuario  = $_SESSION["fotoUsuario"];
         $nomeUsuario  = $_SESSION["nomeUsuario"];
         $emailUsuario = $_SESSION["emailUsuario"];
+
+        //Utiliza a função 'explode' para segmentar o nome completo e armazenar em um array
+        $nomeCompleto = explode(' ', $nomeUsuario);
+        $primeiroNome = $nomeCompleto[0];
     ?>
 
     <!-- Barra de Navegação do Sistema -->
@@ -77,15 +81,22 @@
                         echo "
                             <li>
                                 <div class='container'>
-                                    <img src='$fotoUsuario' class='img-fluid max-height rounded' title='Esta é a sua foto do perfil, $nomeUsuario' style='height:30px;'>
+                                    <img src='$fotoUsuario' class='img-fluid max-height rounded' title='Esta é a sua foto de perfil, $primeiroNome!' style='height:30px;'>
                                 </div>
                             </li>
                             <li class='nav-item dropdown'>
-                                <a class='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown'style='color: yellow'><strong>$emailUsuario</strong>
-                                </a>
-                            </li>
-                            <li class='nav-item dropdown'>
-                                <a class='nav-link' href='logout.php' title='Sair do Sistema'>Logout</a>
+                                <a class='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown' style='color: "; if($tipoUsuario == "administrador"){ echo "red'";} else{ echo "yellow'";} echo "><strong>$emailUsuario</strong></a>
+                                <ul class='dropdown-menu'>
+                                    <li><a class='dropdown-item' href='visualizarPerfil.php?pagina=formLogin&idUsuario=$idUsuario' title='Visualizar Perfil'>Meu Perfil</a></li>";
+                                    if ($tipoUsuario == 'administrador'){ echo"
+                                        <li><a class='dropdown-item' href='meusProdutos.php?pagina=formProduto&idUsuario=$idUsuario'>Meus Produtos</a></li>";
+                                    }else{
+                                        echo"
+                                        <li><a class='dropdown-item' href='meusPedidos.php?pagina=formProduto&idUsuario=$idUsuario'>Meus Pedidos</a></li>";
+                                    }
+                                    echo
+                                    "<li><a class='dropdown-item' href='logout.php?pagina=formLogin' title='Sair do Sistema'>Logout</a></li>
+                                </ul>
                             </li>
                         ";
                     }
