@@ -22,13 +22,13 @@
                     <!-- The slideshow/carousel -->
                     <div class='carousel-inner'>
                         <div class='carousel-item active'>
-                            <img src='img/switch.jpg' alt='Produto - Foto 01' class='d-block w-100'>
+                            <img src='img/switch.jpg' alt='Joaninha Vermelha - Foto 01' class='d-block w-100'>
                         </div>
                         <div class='carousel-item'>
-                            <img src='img/switch.jpg' alt='Produto - Foto 02' class='d-block w-100'>
+                            <img src='img/switch.jpg' alt='Joaninha Vermelha - Foto 02' class='d-block w-100'>
                         </div>
                         <div class='carousel-item'>
-                            <img src='img/switch.jpg' alt='Produto - Foto 03' class='d-block w-100'>
+                            <img src='img/switch.jpg' alt='Joaninha Vermelha - Foto 03' class='d-block w-100'>
                         </div>
                     </div>
                 

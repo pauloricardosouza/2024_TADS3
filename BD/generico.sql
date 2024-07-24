@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 17-Jul-2024 às 03:29
+-- Tempo de geração: 24-Jul-2024 às 03:24
 -- Versão do servidor: 8.0.26
 -- versão do PHP: 8.0.10
 
@@ -46,7 +46,8 @@ CREATE TABLE `produtos` (
 
 INSERT INTO `produtos` (`idProduto`, `fotoProduto`, `nomeProduto`, `descricaoProduto`, `categoriaProduto`, `valorProduto`, `condicaoProduto`, `dataCadastroProduto`, `horaCadastroProduto`, `statusProduto`) VALUES
 (1, 'img/switch.jpg', 'Nintendo Switch', 'Console Nintendo Switch Standard Neon', 'eletronicos', '1500.00', 'Novo', '2024-07-03', '02:43:02', 'disponivel'),
-(2, 'img/logo_petshop.png', 'Osso', 'Osso Pet Shop', 'vestuario', '100.00', 'Novo', '2024-07-10', '02:06:15', 'disponivel');
+(2, 'img/logo_petshop.png', 'Osso', 'Osso Pet Shop', 'vestuario', '100.00', 'Novo', '2024-07-10', '02:06:15', 'disponivel'),
+(3, 'img/vans.webp', 'Tênis VANS', 'Calçado VANS preto Old School Bla bla bla bla', 'vestuario', '300.00', 'Novo', '2024-07-24', '02:47:09', 'esgotado');
 
 -- --------------------------------------------------------
 
@@ -100,7 +101,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `idProduto` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idProduto` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `usuarios`

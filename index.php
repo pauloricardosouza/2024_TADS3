@@ -1,7 +1,21 @@
 <?php include("header.php"); ?>
+
     <?php
         include_once "conexaoBD.php"; //Inclui o arquivo de conexão com o BD
-        $listarProdutos = "SELECT * FROM Produtos"; //Query para selecionar TODOS o Produtos
+        $listarProdutos = "SELECT * FROM Produtos "; //Query para selecionar TODOS o Produtos
+
+        //Início do código para FILTRO
+        if(isset($_GET['filtroProduto'])){
+            $filtroProduto = $_GET['filtroProduto'];
+            //echo "<p>TIPO DO FILTRO: $filtroProduto</p>";
+
+            if($filtroProduto != "todos"){
+                $listarProdutos = $listarProdutos . "WHERE statusProduto LIKE '$filtroProduto'";
+                //echo "<p>QUERY: $listarProdutos</p>";
+            }
+        }
+
+
         $res = mysqli_query($conn, $listarProdutos) or die("Erro ao tentar listar produtos!" . mysqli_error($conn));
         $totalProdutos = mysqli_num_rows($res); //Retorna o total de registros retornado pela Query
     ?>

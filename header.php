@@ -4,7 +4,28 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Genérico</title>
+    <title>
+        <?php
+            //Código para deixar o title da página dinâmico
+
+            if(isset($_GET['pagina'])){
+                $pagina = $_GET['pagina']; //Pega o nome da página via GET
+
+                switch($pagina){
+                    case "index"       : echo "Página Inicial"; break;
+                    case "formUsuario" : echo "Cadastrar Usuário"; break;
+                    case "formProduto" : echo "Cadastrar Produto"; break;
+                    case "formLogin"   : echo "Login"; break;
+
+                    default            : echo "Genérico - Sistema de Vendas"; break;
+                }
+            }
+            else{
+                $pagina = "index";
+                echo "Genérico - Sistemas de Vendas";
+            }
+        ?>
+    </title>
 
     <!-- Úlitima versão compilada e minimizada CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -58,7 +79,7 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php" title="Ir para a Página Inicial">Home</a>
+                        <a class="nav-link <?php if($pagina == 'index'){ echo 'active'; } ?>" href="index.php?pagina=index" title="Ir para a Página Inicial">Home</a>
                     </li>
 
                     <?php
@@ -66,11 +87,12 @@
                         if ($tipoUsuario == "administrador"){
                             echo "
                                 <li class='nav-item'>
-                                    <a class='nav-link' href='formProduto.php' title='Cadastrar Produto'>Cadastrar Produto</a>
+                                    <a class='nav-link "; if($pagina == 'formProduto'){ echo 'active'; } echo"' href='formProduto.php?pagina=formProduto' title='Cadastrar Produto'>Cadastrar Produto</a>
                                 </li>
                             ";
                         }
                     ?>
+
                 </ul>
             </div>
             <?php
@@ -104,7 +126,7 @@
                         //Se não houver sessão iniciada, exibe a opção de acessar o sistema
                         echo "
                             <li class='nav-item'>
-                                <a class='nav-link' href='formLogin.php' title='Acessar o Sistema'>Login</a>
+                                <a class='nav-link "; if($pagina == 'formLogin'){ echo 'active'; } echo "' href='formLogin.php?pagina=formLogin' title='Acessar o Sistema'>Login</a>
                             </li>
                         ";
                     }
