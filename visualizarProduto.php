@@ -1,55 +1,120 @@
 <?php include "header.php"; ?>
 
 <?php
-    
+
     echo"
-        <div class='row'>
+        <div class='row text-center'>
+            <div class='d-flex justify-content-center mb-3'>
+                <div class='card mb-5' style='width:40%; border-style:none;'>";
 
-            <div class='col-sm-3'></div>
+                    //Verifica se há parâmetro por GET sendo recebido
+                    if(isset($_GET['idProduto'])){
 
-            <div class='col-sm-6 text-center mb-5'>
+                        //Variável PHP para armazenar o parâmetro recebido
+                        $idProduto = $_GET['idProduto'];
 
-                <!-- Carousel -->
-                <div id='demo' class='carousel slide' data-bs-ride='carousel' style='margin:auto;'>
+                        //Inclui o arquivo de conexão com o BD
+                        include "conexaoBD.php";
 
-                    <!-- Indicators/dots -->
-                    <div class='carousel-indicators'>
-                        <button type='button' data-bs-target='#demo' data-bs-slide-to='0' class='active'></button>
-                        <button type='button' data-bs-target='#demo' data-bs-slide-to='1'></button>
-                        <button type='button' data-bs-target='#demo' data-bs-slide-to='2'></button>
-                    </div>
-                
-                    <!-- The slideshow/carousel -->
-                    <div class='carousel-inner'>
-                        <div class='carousel-item active'>
-                            <img src='img/switch.jpg' alt='Joaninha Vermelha - Foto 01' class='d-block w-100'>
-                        </div>
-                        <div class='carousel-item'>
-                            <img src='img/switch.jpg' alt='Joaninha Vermelha - Foto 02' class='d-block w-100'>
-                        </div>
-                        <div class='carousel-item'>
-                            <img src='img/switch.jpg' alt='Joaninha Vermelha - Foto 03' class='d-block w-100'>
-                        </div>
-                    </div>
-                
-                    <!-- Left and right controls/icons -->
-                    <button class='carousel-control-prev' type='button' data-bs-target='#demo' data-bs-slide='prev'>
-                        <span class='carousel-control-prev-icon'></span>
-                    </button>
-                    <button class='carousel-control-next' type='button' data-bs-target='#demo' data-bs-slide='next'>
-                        <span class='carousel-control-next-icon'></span>
-                    </button>
+                        $exibirProduto = "SELECT * FROM Produtos WHERE idProduto = $idProduto";
+                        $res = mysqli_query($conn, $exibirProduto); //Executa o comando de listagem
+                        $totalProdutos = mysqli_num_rows($res); //Retornar a quantidade de registros
+
+                        if($totalProdutos > 0){
+                    
+                            //Caso encontre o id, armazena os campos em um array
+                            if($registro = mysqli_fetch_assoc($res)){
+                                //Cria variáveis PHP e armazen os registros nelas
+                                $idProduto           = $registro["idProduto"];
+                                $fotoProduto         = $registro["fotoProduto"];
+                                $nomeProduto         = $registro["nomeProduto"];
+                                $descricaoProduto    = $registro["descricaoProduto"];
+                                $categoriaProduto    = $registro["categoriaProduto"];
+                                $valorProduto        = $registro["valorProduto"];
+                                $condicaoProduto     = $registro["condicaoProduto"];
+                                $dataCadastroProduto = $registro["dataCadastroProduto"];
+                                $horaCadastroProduto = $registro["horaCadastroProduto"];
+                                $statusProduto       = $registro["statusProduto"];
+                            
+                                //Monta o slider caso hajam produtos
+                                echo "
+                                    <!-- Carousel -->
+                                    <div id='Produto' class='carousel slide' data-bs-ride='carousel'>
+
+                                        <!-- Indicators/dots -->
+                                        <div class='carousel-indicators'>
+                                            <button type='button' data-bs-target='#Produto' data-bs-slide-to='0' class='active'></button>
+                                            <button type='button' data-bs-target='#Produto' data-bs-slide-to='1'></button>
+                                            <button type='button' data-bs-target='#Produto' data-bs-slide-to='2'></button>
+                                        </div>
+                                            
+                                        <!-- The slideshow/carousel -->
+                                        <div class='carousel-inner'>
+                                            <div class='carousel-item active'>
+                                                <img src='$fotoProduto' alt='$nomeProduto' class='d-block' style='width:100%'>
+                                            </div>
+                                            <div class='carousel-item'>
+                                                <img src='$fotoProduto' alt='$nomeProduto' class='d-block' style='width:100%'>
+                                            </div>
+                                            <div class='carousel-item'>
+                                                <img src='$fotoProduto' alt='$nomeProduto' class='d-block' style='width:100%'>
+                                            </div>
+                                        </div>
+                                            
+                                        <!-- Left and right controls/icons -->
+                                        <button class='carousel-control-prev' type='button' data-bs-target='#Produto' data-bs-slide='prev'>
+                                            <span class='carousel-control-prev-icon'></span>
+                                        </button>
+                                        <button class='carousel-control-next' type='button' data-bs-target='#Produto' data-bs-slide='next'>
+                                            <span class='carousel-control-next-icon'></span>
+                                        </button>
+
+                                    </div>
+
+                                    <div class='card-body'>
+                                        <h4 class='card-title'><b>$nomeProduto</b></h4>
+                                        <p class='card-text'>$descricaoProduto</p>
+                                        <p class='card-text'><b>echo $valorProduto</b></p>
+                                    </div> 
+                                ";
+                                
+                                session_start();
+                                $tipoUsuario = $_SESSION['tipoUsuario'];
+                                if($tipoUsuario == "administrador"){
+                                    echo "
+                                        <a href='formEditarProduto.php?idProduto=$idProduto' title='Editar Produto'>
+                                            <button class='btn btn-outline-primary'>
+                                                <i class='bi bi-gear' style='font-size:16pt;'></i>
+                                                <p>Editar Produto</p>
+                                            </button>
+                                        </a>
+                                    ";
+                                }
+                                else{
+                                    if($statusProduto == 'disponivel'){
+                                        echo "
+                                            <a href='realizarPedido.php?idProduto=$idProduto' title='Realizar Pedido'>
+                                                <button class='btn btn-outline-primary'>
+                                                    <i class='bi bi-gear' style='font-size:16pt;'></i>
+                                                    <p>Realizar Pedido</p>
+                                                </button>
+                                            </a>
+                                        ";
+                                    }
+                                    else{
+                                        echo"
+                                            <div class='alert alert-danger'>
+                                                Produto Esgotado!
+                                            </div>
+                                        ";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ?>
                 </div>
-                <h2>NOME DO PRODUTO</h2>
-                <h3>R$ PREÇO</h3>
-                <br>
-                <a href='#realizarCompra.html' class='btn btn-primary text-center'>Comprar</a>
-            
             </div>
-
         </div>
-    ";
-
-?>
 
 <?php include("footer.php"); ?>

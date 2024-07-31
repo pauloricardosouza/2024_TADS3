@@ -66,7 +66,7 @@
                                 <div class='card-body'>
                                     <h4 class='card-title'>$nomeProduto</h4>
                                     <p class='card-text'>R$ $valorProduto</p>
-                                    <a href='visualizarProduto.php' class='btn btn-primary'>Ver Detalhes</a>
+                                    <a href='visualizarProduto.php?idProduto=$idProduto' class='btn btn-primary'>Ver Detalhes</a>
                                 </div>
                             </div>
                         </div>
