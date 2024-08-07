@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24-Jul-2024 às 03:24
+-- Tempo de geração: 07-Ago-2024 às 03:43
 -- Versão do servidor: 8.0.26
 -- versão do PHP: 8.0.10
 
@@ -20,6 +20,29 @@ SET time_zone = "+00:00";
 --
 -- Banco de dados: `generico`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `idPedido` int NOT NULL,
+  `idUsuario` int NOT NULL,
+  `idProduto` int NOT NULL,
+  `dataPedido` date NOT NULL,
+  `horaPedido` time NOT NULL,
+  `statusPedido` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Extraindo dados da tabela `pedidos`
+--
+
+INSERT INTO `pedidos` (`idPedido`, `idUsuario`, `idProduto`, `dataPedido`, `horaPedido`, `statusPedido`) VALUES
+(1, 3, 1, '2024-08-06', '22:04:24', 'Solicitado'),
+(2, 3, 1, '2024-08-06', '22:13:21', 'Solicitado');
 
 -- --------------------------------------------------------
 
@@ -45,7 +68,7 @@ CREATE TABLE `produtos` (
 --
 
 INSERT INTO `produtos` (`idProduto`, `fotoProduto`, `nomeProduto`, `descricaoProduto`, `categoriaProduto`, `valorProduto`, `condicaoProduto`, `dataCadastroProduto`, `horaCadastroProduto`, `statusProduto`) VALUES
-(1, 'img/switch.jpg', 'Nintendo Switch', 'Console Nintendo Switch Standard Neon', 'eletronicos', '1500.00', 'Novo', '2024-07-03', '02:43:02', 'disponivel'),
+(1, 'img/switchNeon.webp', 'Nintendo Switch Neon', 'Console Nintendo Switch Standard Neon', 'alimentos', '1500.00', 'Novo', '2024-08-06', '22:43:03', 'disponivel'),
 (2, 'img/logo_petshop.png', 'Osso', 'Osso Pet Shop', 'vestuario', '100.00', 'Novo', '2024-07-10', '02:06:15', 'disponivel'),
 (3, 'img/vans.webp', 'Tênis VANS', 'Calçado VANS preto Old School Bla bla bla bla', 'vestuario', '300.00', 'Novo', '2024-07-24', '02:47:09', 'esgotado');
 
@@ -82,6 +105,14 @@ INSERT INTO `usuarios` (`idUsuario`, `fotoUsuario`, `nomeUsuario`, `cidadeUsuari
 --
 
 --
+-- Índices para tabela `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`idPedido`),
+  ADD KEY `idUsuario` (`idUsuario`),
+  ADD KEY `idProduto` (`idProduto`);
+
+--
 -- Índices para tabela `produtos`
 --
 ALTER TABLE `produtos`
@@ -98,6 +129,12 @@ ALTER TABLE `usuarios`
 --
 
 --
+-- AUTO_INCREMENT de tabela `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `idPedido` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de tabela `produtos`
 --
 ALTER TABLE `produtos`
@@ -108,6 +145,17 @@ ALTER TABLE `produtos`
 --
 ALTER TABLE `usuarios`
   MODIFY `idUsuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- Restrições para despejos de tabelas
+--
+
+--
+-- Limitadores para a tabela `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `pedidos_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `usuarios` (`idUsuario`),
+  ADD CONSTRAINT `pedidos_ibfk_2` FOREIGN KEY (`idProduto`) REFERENCES `produtos` (`idProduto`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

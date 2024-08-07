@@ -44,6 +44,11 @@
         });
     </script>
 
+    <?php
+        //Setar as configurações de horário para o fuso de América / São Paulo
+        date_default_timezone_set('America/Sao_Paulo');
+    ?>
+
 </head>
 <body>
 

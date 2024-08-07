@@ -74,40 +74,45 @@
                                 <div class='card-body'>
                                     <h4 class='card-title'><b>$nomeProduto</b></h4>
                                     <p class='card-text'>$descricaoProduto</p>
-                                    <p class='card-text'><b>echo $valorProduto</b></p>
+                                    <p class='card-text'>R$ <b>$valorProduto</b></p>
                                 </div> 
                             ";
                                     
                             session_start();
-                            $tipoUsuario = $_SESSION['tipoUsuario'];
-                            if($tipoUsuario == "administrador"){
-                                echo "
-                                    <a href='formEditarProduto.php?idProduto=$idProduto' title='Editar Produto'>
-                                        <button class='btn btn-outline-primary'>
-                                            <i class='bi bi-gear' style='font-size:16pt;'></i>
-                                            <p>Editar Produto</p>
-                                        </button>
-                                    </a>
-                                ";
-                            }
-                            else{
-                                if($statusProduto == 'disponivel'){
+                            if(isset($_SESSION['logado']) && $_SESSION['logado'] === true){
+                                $tipoUsuario = $_SESSION['tipoUsuario'];
+                                if($tipoUsuario == "administrador"){
                                     echo "
-                                        <a href='realizarPedido.php?idProduto=$idProduto' title='Realizar Pedido'>
+                                        <a href='formEditarProduto.php?idProduto=$idProduto' title='Editar Produto'>
                                             <button class='btn btn-outline-primary'>
                                                 <i class='bi bi-gear' style='font-size:16pt;'></i>
-                                                <p>Realizar Pedido</p>
+                                                <p>Editar Produto</p>
                                             </button>
                                         </a>
                                     ";
                                 }
                                 else{
-                                    echo"
-                                        <div class='alert alert-danger'>
-                                            Produto Esgotado!
-                                        </div>
-                                    ";
+                                    if($statusProduto == 'disponivel'){
+                                        echo "
+                                            <a href='efetuarPedido.php?idProduto=$idProduto' title='Efetuar Pedido'>
+                                                <button class='btn btn-outline-primary'>
+                                                    <i class='bi bi-gear' style='font-size:16pt;'></i>
+                                                    <p>Efetuar Pedido</p>
+                                                </button>
+                                            </a>
+                                        ";
+                                    }
+                                    else{
+                                        echo"
+                                            <div class='alert alert-danger'>
+                                                Produto Esgotado!
+                                            </div>
+                                        ";
+                                    }
                                 }
+                            }
+                            else{
+                                echo "<div class='alert alert-info'><a href='formLogin.php' class='alert-link'>Clique aqui</a> para acessar o sistema e efetuar pedidos!</div>";
                             }
                         }
                     }

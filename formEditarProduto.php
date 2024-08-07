@@ -47,11 +47,10 @@
                                                     <label for='idProduto' class='form-label'>ID:</label>
                                                 </div>
 
-                                                <div class='form-floating mb-3 mt-3'>
-                                                    <input type='file' class='form-control' id='fotoProduto' name='fotoProduto' required>
-                                                    <label for='fotoProduto' class='form-label'>Foto:</label>
-                                                    <div class='valid-feedback'></div>
-                                                    <div class='invalid-feedback'></div>
+                                                <div class='form-group'>
+                                                    <img src='$fotoProduto' width='100' title='Foto de $nomeProduto'>
+                                                    <input type='hidden' name='fotoAtual' value='$fotoProduto'>
+                                                    <input type='file' class='btn btn-link' name='fotoProduto'>
                                                 </div>
 
                                                 <div class='form-floating mb-3 mt-3'>
@@ -91,9 +90,13 @@
                                                     <label class='form-check-label' for='condicaoProduto'>Produto novo</label>
                                                 </div>
 
+                                                <div class='form-group'>
+                                                    <input type='hidden' name='statusProduto' value='$statusProduto'>
+                                                </div>
+
                                                 <br>
 
-                                                <button type='submit' class='btn btn-primary'>Cadastrar</button>
+                                                <button type='submit' class='btn btn-primary'>Salvar Alterações</button>
                                             </form>";
                                     }
                                 }
